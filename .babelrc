@@ -1,0 +1,5 @@
+{
+  // 这是json5文件，语法类似JavaScript
+  // stage-3提供async/await和...运算符
+  "presets": ["env", "stage-3"]
+}
