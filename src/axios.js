@@ -1,7 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
 import router from './router'
-import store from './store'
 
 Vue.prototype.$qs = require('qs')
 

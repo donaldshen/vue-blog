@@ -8,6 +8,8 @@
 ## Build Setup
 
 ``` bash
+# 在本机启动MongoDB服务，参照官网即可
+
 # install dependencies
 npm install
 
@@ -17,7 +19,7 @@ npm run server
 # serve frontend with hot reload at localhost:9000
 npm run dev
 
-# build for production
+# build for production, check localhost:3000/dist to see its result
 npm run build
 ```
 ---

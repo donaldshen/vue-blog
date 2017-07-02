@@ -22,8 +22,6 @@
 </template>
 
 <script>
-const qs = require('qs')
-
 export default {
   name: 'signin',
   data() {
@@ -58,7 +56,7 @@ export default {
             const res = await this.$http({
               method: 'post',
               url: 'sessions',
-              data: qs.stringify(this.form),
+              data: this.$qs.stringify(this.form),
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
               },
