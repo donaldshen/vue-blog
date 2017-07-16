@@ -11,20 +11,20 @@ import { mapState, mapGetters } from 'vuex'
 import PostContent from './PostContent.vue'
 
 export default {
-  data() {
+  data () {
     return {
     }
   },
   computed: {
     ...mapState(['posts']),
     ...mapGetters(['userName']),
-    postsDisplay() {
+    postsDisplay () {
       return this.posts.filter(post => post.access === 'public' || this.userName === post.author.name)
-    },
+    }
   },
   components: {
-    PostContent,
-  },
+    PostContent
+  }
 }
 </script>
 

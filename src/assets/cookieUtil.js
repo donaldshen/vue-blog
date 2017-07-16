@@ -1,4 +1,4 @@
-function get(name) {
+function get (name) {
   const cookieName = `${encodeURIComponent(name)}=`
   const cookieStart = document.cookie.indexOf(cookieName)
 
@@ -13,7 +13,7 @@ function get(name) {
   }
 }
 
-function set(name, value, expires, path, domain, secure) {
+function set (name, value, expires, path, domain, secure) {
   let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
   if (expires instanceof Date) { cookieText += `; expires=${expires.toGMTString()}` }
   if (path) cookieText += `; path=${path}`
@@ -22,11 +22,11 @@ function set(name, value, expires, path, domain, secure) {
   document.cookie = cookieText
 }
 
-function unset(name, path, domain, secure) {
+function unset (name, path, domain, secure) {
   set(name, '', new Date(0), path, domain, secure)
 }
 
-function clear() {
+function clear () {
   document.cookie.split(';').forEach((c) => { document.cookie = c.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`) })
 }
 
@@ -34,5 +34,5 @@ export {
   get,
   set,
   unset,
-  clear,
+  clear
 }

@@ -27,48 +27,48 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       post: {
         title: '',
         content: '',
-        access: 'public',
+        access: 'public'
       },
       rules: {
         title: [
           {
             required: true,
             message: '请输入标题',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         content: [
           {
             required: true,
             message: '请输入内容',
-            trigger: 'blur',
-          },
-        ],
-      },
+            trigger: 'blur'
+          }
+        ]
+      }
     }
   },
   computed: {
-    author() {
+    author () {
       return this.$store.state.user.name
     },
-    preview() {
+    preview () {
       return this.$marked(this.post.content)
-    },
+    }
   },
   methods: {
-    async submitForm(formName) {
+    async submitForm (formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           const post = {
             author: this.author,
             title: this.post.title,
             content: this.post.content,
-            access: this.post.access,
+            access: this.post.access
           }
           try {
             const res = await this.$http({
@@ -76,12 +76,12 @@ export default {
               url: 'posts',
               data: this.$qs.stringify(post),
               headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-              },
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
             })
             this.$message({
               message: res.data.message,
-              type: 'success',
+              type: 'success'
             })
             this.$router.replace('/')
           } catch (e) {
@@ -91,8 +91,8 @@ export default {
           console.log('Error', '表单有误')
         }
       })
-    },
-  },
+    }
+  }
 }
 </script>
 

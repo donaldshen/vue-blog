@@ -5,41 +5,41 @@ const mongodbURI = require('config-lite')(__dirname).mongodbURI
 let userCollection
 let postCollection
 
-(async function createDB() {
+(async function createDB () {
   let db
   try {
     db = await MongoClient.connect(mongodbURI)
     userCollection = await db.createCollection('user', {
       validator: {
         name: {
-          $type: 'string',
+          $type: 'string'
         },
         password: {
-          $type: 'string',
+          $type: 'string'
         },
         bio: {
-          $type: 'string',
-        },
-      },
+          $type: 'string'
+        }
+      }
     })
     userCollection.createIndex({
-      name: 1,
+      name: 1
     }, {
-      unique: true,
+      unique: true
     })
     postCollection = await db.createCollection('post', {
       validator: {
         author: { $type: 'string' },
         title: { $type: 'string' },
         content: { $type: 'string' },
-        access: { $in: ['public', 'private'] },
-      },
+        access: { $in: ['public', 'private'] }
+      }
     })
     postCollection.createIndex({
       author: 1,
-      title: 1,
+      title: 1
     }, {
-      unique: true,
+      unique: true
     })
   } catch (e) {
     console.error(`error: ${e.message}`)
@@ -49,26 +49,26 @@ let postCollection
 
 module.exports = {
   UserModel: {
-    async add(user) {
+    async add (user) {
       return userCollection.insertOne(user)
     },
-    async get({ name }) {
+    async get ({ name }) {
       return userCollection.findOne({ name })
     },
-    async delete({ name }) {
+    async delete ({ name }) {
       return Promise.all([
         postCollection.deleteMany({
-          author: name,
+          author: name
         }),
-        userCollection.deleteOne({ name }),
+        userCollection.deleteOne({ name })
       ])
-    },
+    }
   },
   PostModel: {
-    async add(post) {
+    async add (post) {
       return postCollection.insertOne(post)
     },
-    async get(author) {
+    async get (author) {
       const query = author ? { author } : {}
       const posts = await postCollection.find(query).toArray()
       const promises = posts.map((post) => {
@@ -78,7 +78,7 @@ module.exports = {
         delete post._id
         return new Promise(async (resolve) => {
           const au = await userCollection.findOne({
-            name: post.author,
+            name: post.author
           })
           delete au.password
           delete au._id
@@ -88,17 +88,17 @@ module.exports = {
       })
       return Promise.all(promises)
     },
-    async delete({ id }) {
+    async delete ({ id }) {
       return postCollection.deleteOne({ _id: new ObjectID(id) })
     },
-    async update(post) {
+    async update (post) {
       const _id = new ObjectID(post.id)
       delete post.id
       return postCollection.findAndModify({
-        _id,
+        _id
       }, [], {
-        $set: post,
+        $set: post
       })
-    },
-  },
+    }
+  }
 }

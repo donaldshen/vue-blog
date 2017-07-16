@@ -3,44 +3,43 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-
 export default new Vuex.Store({
   state: {
     user: null,
-    posts: null,
+    posts: null
   },
   getters: {
-    userName(state) {
+    userName (state) {
       return state.user ? state.user.name : null
-    },
+    }
   },
   mutations: {
-    updateUser(state, user) {
+    updateUser (state, user) {
       state.user = user
     },
-    updatePosts(state, posts) {
+    updatePosts (state, posts) {
       state.posts = posts
-    },
+    }
   },
   actions: {
-    async checkLogin({ commit }) {
+    async checkLogin ({ commit }) {
       const res = await Vue.prototype.$http({
         method: 'get',
-        url: 'sessions',
+        url: 'sessions'
       })
       commit('updateUser', res.data.user)
     },
-    async fetchPosts({ commit }) {
+    async fetchPosts ({ commit }) {
       try {
         const res = await Vue.prototype.$http({
           method: 'get',
-          url: 'posts',
+          url: 'posts'
         })
         commit('updatePosts', res.data)
       } catch (e) {
         //
       }
-    },
+    }
   },
-  strict: process.env.NODE_ENV !== 'production',
+  strict: process.env.NODE_ENV !== 'production'
 })

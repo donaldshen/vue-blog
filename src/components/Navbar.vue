@@ -19,21 +19,21 @@
 <script>
 export default {
   computed: {
-    user() {
+    user () {
       return this.$store.state.user
-    },
+    }
   },
   methods: {
-    async handleSelect(index) {
+    async handleSelect (index) {
       try {
         if (['signout', 'deleteAcount'].includes(index)) {
           const res = await this.$http({
             method: 'delete',
-            url: index === 'signout' ? 'sessions' : 'users',
+            url: index === 'signout' ? 'sessions' : 'users'
           })
           this.$message({
             message: res.data.message,
-            type: 'success',
+            type: 'success'
           })
           this.$store.commit('updateUser', null)
           this.$router.replace('/')
@@ -41,8 +41,8 @@ export default {
       } catch (e) {
         //
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

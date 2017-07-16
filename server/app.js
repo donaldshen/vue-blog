@@ -41,13 +41,13 @@ app.use(session({
     // 过期时间，过期后 cookie 中的 session id 自动删除
     maxAge: 1000 * 60 * 60 * (isProduction ? 24 : 8),
     // 生产环境应启用
-    httpOnly: isProduction,
+    httpOnly: isProduction
   },
   store: new MongoStore({
-    url: config.mongodbURI,
+    url: config.mongodbURI
   }),
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: false
 }))
 
 // test dist
@@ -58,12 +58,12 @@ if (isProduction) {
     transports: [
       new winston.transports.Console({
         json: true,
-        colorize: true,
-      }),
+        colorize: true
+      })
       // new winston.transports.File({
       //   filename: 'logs/success.log',
       // }),
-    ],
+    ]
   }))
 }
 
@@ -74,12 +74,12 @@ if (isProduction) {
     transports: [
       new winston.transports.Console({
         json: true,
-        colorize: true,
-      }),
+        colorize: true
+      })
       // new winston.transports.File({
       //   filename: 'logs/error.log',
       // }),
-    ],
+    ]
   }))
 }
 

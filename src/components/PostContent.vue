@@ -16,16 +16,16 @@
 <script>
 export default {
   props: {
-    post: Object,
+    post: Object
   },
   computed: {
-    content() {
+    content () {
       return this.$marked(this.post.content)
     },
-    birth() {
+    birth () {
       return new Date(this.post.birth).toLocaleDateString()
-    },
-  },
+    }
+  }
 }
 </script>
 

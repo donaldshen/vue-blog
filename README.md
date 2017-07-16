@@ -8,7 +8,7 @@
 ## Build Setup
 
 ``` bash
-# 在本机启动MongoDB服务，参照官网即可
+# 在本机启动MongoDB服务，监听默认端口（27017）。参照官网下载配置运行即可。
 
 # install dependencies
 npm install

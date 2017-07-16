@@ -13,61 +13,61 @@ import { mapState, mapGetters } from 'vuex'
 import PostContent from './PostContent.vue'
 
 export default {
-  data() {
+  data () {
     return {
-      editing: false,
+      editing: false
     }
   },
   computed: {
     ...mapState(['posts']),
     ...mapGetters(['userName']),
-    post() {
+    post () {
       return this.posts.find(post => post.id === this.$route.params.id)
-    },
+    }
   },
-  created() {
+  created () {
     if (this.post.access === 'private' && this.post.author.name !== this.userName) {
       this.$router.replace('/')
     }
   },
   methods: {
-    editPost() {
+    editPost () {
       const temp = {
         title: this.post.title,
         content: this.post.content,
-        access: this.post.access,
+        access: this.post.access
       }
       const h = this.$createElement
       this.$msgbox({
         title: '修改文章',
         message: h('el-form', [
           h('el-form-item', {
-            props: { label: '标题' },
+            props: { label: '标题' }
           }, [
             h('el-input', {
               props: { value: temp.title },
               on: {
-                change(v) {
+                change (v) {
                   temp.title = v
-                },
-              },
-            }),
+                }
+              }
+            })
           ]),
           h('el-form-item', {
-            props: { label: '内容' },
+            props: { label: '内容' }
           }, [
             h('el-input', {
               props: {
                 type: 'textarea',
                 autosize: { minRows: 4, maxRows: 10 },
-                value: temp.content,
+                value: temp.content
               },
               on: {
-                change(v) {
+                change (v) {
                   temp.content = v
-                },
-              },
-            }),
+                }
+              }
+            })
           ]),
           h('el-form-item', [
             // render函数不支持v-model。若想使用el-radio-group的话会很tricky
@@ -101,31 +101,31 @@ export default {
               attrs: {
                 name: 'access',
                 type: 'radio',
-                checked: temp.access === 'public',
+                checked: temp.access === 'public'
                 // value: 'public',
               },
               on: {
-                click() {
+                click () {
                   temp.access = 'public'
-                },
-              },
+                }
+              }
             }),
             h('label', '公开'),
             h('input', {
               attrs: {
                 name: 'access',
                 type: 'radio',
-                checked: temp.access === 'private',
+                checked: temp.access === 'private'
                 // value: 'private',
               },
               on: {
-                click() {
+                click () {
                   temp.access = 'private'
-                },
-              },
+                }
+              }
             }),
-            h('label', '私密'),
-          ]),
+            h('label', '私密')
+          ])
         ]),
         showCancelButton: true,
         beforeClose: async (action, instance, done) => {
@@ -135,26 +135,26 @@ export default {
               url: `posts/${this.post.id}`,
               data: this.$qs.stringify(temp),
               headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-              },
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
             })
             Object.assign(this.post, temp)
           }
           done()
-        },
+        }
       })
     },
-    async deletePost() {
+    async deletePost () {
       await this.$http({
         method: 'delete',
-        url: `posts/${this.post.id}`,
+        url: `posts/${this.post.id}`
       })
       this.$router.replace('/')
-    },
+    }
   },
   components: {
-    PostContent,
-  },
+    PostContent
+  }
 }
 </script>
 
