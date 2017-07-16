@@ -1,7 +1,7 @@
 module.exports = {
   // parser: 'sugarss',
   plugins: {
-    'postcss-cssnext': {},
+    'postcss-cssnext': {}
     // fontMagician: {},
-  },
+  }
 }

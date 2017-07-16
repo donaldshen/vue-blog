@@ -17,6 +17,8 @@ npm install
 npm run server
 
 # serve frontend with hot reload at localhost:9000
+# webpack-dev-server刚启动时可能会报beforeCreate或__require__的错误，使页面渲染有些小问题。过会儿就好了。
+# 可以运行下个命令查看编译后的结果是没有bug的。
 npm run dev
 
 # build for production, check localhost:3000/dist to see its result
