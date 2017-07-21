@@ -1,4 +1,4 @@
-# simple Vue blog
+# simple Vue blog platform
 
 > 前端：vue，vue-router，vuex，element-ui，axios；  
 > 后端：express，mongodb，提供RESTful服务；  
@@ -24,6 +24,11 @@ npm run dev
 # build for production, check localhost:3000/dist to see its result
 npm run build
 ```
+
+## Bug
+1. dev模式启动后vue文件中的css未被正确读取，过一段时间会好，情况不明。（build的文件没这个问题）
+2. 编译后的文件显示没问题，但编辑功能会使页面崩溃。可能和dev模式下报的`infinite update loop`有关。未排除是否是框架问题。
+
 ---
 ## MODEL
 ```

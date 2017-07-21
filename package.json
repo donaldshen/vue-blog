@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "lint": "eslint --fix \"server/**/*.js\" \"src/**/*.vue\" \"src/**/*.js\"",
+    "lint": "eslint --fix \"server/**/*.js\" \"src/**/*.@(js|vue)\"",
     "build": "webpack -p --env.production --env.platform=web --progress",
     "dev": "webpack-dev-server --open --hot",
     "server": "nodemon server/app.js"

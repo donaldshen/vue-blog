@@ -1,7 +1,8 @@
 module.exports = {
   // parser: 'sugarss',
   plugins: {
-    'postcss-cssnext': {}
-    // fontMagician: {},
+    autoprefixer: {},
+    'postcss-custom-properties': {},
+    'postcss-nesting': {}
   }
 }
