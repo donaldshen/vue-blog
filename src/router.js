@@ -13,42 +13,42 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: 'posts'
+      redirect: 'posts',
     },
     {
       path: '/posts',
       name: 'posts',
-      component: Posts
+      component: Posts,
     },
     {
       path: '/posts/:id',
       name: 'post',
-      component: Post
+      component: Post,
     },
     {
       path: '/signin',
       name: 'signin',
       component: SignIn,
       meta: {
-        requiresNotLogin: true
-      }
+        requiresNotLogin: true,
+      },
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
       meta: {
-        requiresNotLogin: true
-      }
+        requiresNotLogin: true,
+      },
     },
     {
       path: '/create',
       name: 'create',
       component: Create,
       meta: {
-        requiresLogin: true
-      }
-    }
+        requiresLogin: true,
+      },
+    },
   ],
   // need mode: 'history'
   scrollBehavior (to, from, savedPosition) {
@@ -56,12 +56,12 @@ const router = new Router({
       return savedPosition
     } else if (to.hash) {
       return {
-        selector: to.hash
+        selector: to.hash,
       }
     } else {
       return { x: 0, y: 0 }
     }
-  }
+  },
 })
 
 router.beforeEach(async (to, from, next) => {

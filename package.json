@@ -41,6 +41,7 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.5.2",
     "babel-preset-stage-3": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.4",
     "eslint": "^4.2.0",
     "eslint-config-standard": "^10.2.1",

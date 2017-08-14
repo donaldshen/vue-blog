@@ -16,6 +16,7 @@ export default {
   data () {
     return {
       editing: false,
+      sign: false,
     }
   },
   computed: {
@@ -31,6 +32,127 @@ export default {
     }
   },
   methods: {
+    elForm (h, temp) {
+      return h('el-form', [
+        h('el-form-item', {
+          props: { label: '标题' },
+        }, [
+          h('el-input', {
+            props: { value: temp.title },
+            on: {
+              change (v) {
+                temp.title = v
+              },
+            },
+          }),
+        ]),
+        h('el-form-item', {
+          props: { label: '内容' },
+        }, [
+          h('el-input', {
+            props: {
+              type: 'textarea',
+              autosize: { minRows: 4, maxRows: 10 },
+              value: temp.content,
+            },
+            on: {
+              change (v) {
+                temp.content = v
+              },
+            },
+          }),
+        ]),
+        h('el-form-item', [
+          // render函数不支持v-model。若想使用el-radio-group的话会很tricky
+          h('el-radio-group', {
+            props: {
+              value: temp.access,
+            },
+            on: {
+              change: (v) => {
+                console.log(v)
+              },
+            },
+          }, [
+            h('el-radio-button', {
+              props: {
+                label: 'public',
+              },
+            }, '公开'),
+            h('el-radio-button', {
+              props: {
+                label: 'private',
+              },
+              on: {
+                '!click': () => {
+                  console.log('shit')
+                },
+              },
+            }, '私密'),
+          ]),
+        ]),
+      ])
+    },
+    form (h, temp) {
+      return h('form', [
+        h('label', '标题'),
+        h('el-input', {
+          props: { value: temp.title },
+          on: {
+            change (v) {
+              temp.title = v
+            },
+          },
+          style: {
+            margin: '10px 0',
+          },
+        }),
+        h('label', '内容'),
+        h('el-input', {
+          props: {
+            type: 'textarea',
+            autosize: { minRows: 4, maxRows: 10 },
+            value: temp.content,
+          },
+          on: {
+            change (v) {
+              temp.content = v
+            },
+          },
+          style: {
+            margin: '10px 0',
+          },
+        }),
+        h('input', {
+          attrs: {
+            name: 'access',
+            type: 'radio',
+            checked: temp.access === 'public',
+            // value: 'public',
+          },
+          on: {
+            click () {
+              temp.access = 'public'
+            },
+          },
+        }),
+        h('label', '公开'),
+        h('input', {
+          attrs: {
+            name: 'access',
+            type: 'radio',
+            checked: temp.access === 'private',
+            // value: 'private',
+          },
+          on: {
+            click () {
+              temp.access = 'private'
+            },
+          },
+        }),
+        h('label', '私密'),
+      ])
+    },
     editPost () {
       const temp = {
         title: this.post.title,
@@ -40,93 +162,7 @@ export default {
       const h = this.$createElement
       this.$msgbox({
         title: '修改文章',
-        message: h('el-form', [
-          h('el-form-item', {
-            props: { label: '标题' },
-          }, [
-            h('el-input', {
-              props: { value: temp.title },
-              on: {
-                change (v) {
-                  temp.title = v
-                },
-              },
-            }),
-          ]),
-          // h('el-form-item', {
-          //   props: { label: '内容' }
-          // }, [
-          //   h('el-input', {
-          //     props: {
-          //       type: 'textarea',
-          //       autosize: { minRows: 4, maxRows: 10 },
-          //       value: temp.content
-          //     },
-          //     on: {
-          //       change (v) {
-          //         temp.content = v
-          //       }
-          //     }
-          //   })
-          // ]),
-          // h('el-form-item', [
-          //   // render函数不支持v-model。若想使用el-radio-group的话会很tricky
-          //   // h('el-radio-group', {
-          //   //   domProps: {
-          //   //     value: temp.access,
-          //   //   },
-          //   //   on: {
-          //   //     change: (v) => {
-          //   //       console.log(v)
-          //   //     },
-          //   //   },
-          //   // }, [
-          //   //   h('el-radio-button', {
-          //   //     props: {
-          //   //       label: 'public',
-          //   //     },
-          //   //   }, '公开'),
-          //   //   h('el-radio-button', {
-          //   //     props: {
-          //   //       label: 'private',
-          //   //     },
-          //   //     on: {
-          //   //       '!click': () => {
-          //   //         console.log('shit')
-          //   //       },
-          //   //     },
-          //   //   }, '私密'),
-          //   // ]),
-          //   h('input', {
-          //     attrs: {
-          //       name: 'access',
-          //       type: 'radio',
-          //       checked: temp.access === 'public'
-          //       // value: 'public',
-          //     },
-          //     on: {
-          //       click () {
-          //         temp.access = 'public'
-          //       }
-          //     }
-          //   }),
-          //   h('label', '公开'),
-          //   h('input', {
-          //     attrs: {
-          //       name: 'access',
-          //       type: 'radio',
-          //       checked: temp.access === 'private'
-          //       // value: 'private',
-          //     },
-          //     on: {
-          //       click () {
-          //         temp.access = 'private'
-          //       }
-          //     }
-          //   }),
-          //   h('label', '私密')
-          // ])
-        ]),
+        message: this.form(h, temp),
         showCancelButton: true,
         beforeClose: async (action, instance, done) => {
           if (action === 'confirm') {
@@ -138,7 +174,10 @@ export default {
                 'Content-Type': 'application/x-www-form-urlencoded',
               },
             })
-            Object.assign(this.post, temp)
+            this.$store.commit('updatePost', {
+              post: this.post,
+              data: temp,
+            })
           }
           done()
         },

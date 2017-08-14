@@ -26,7 +26,7 @@ npm run build
 ```
 
 ## Bug
-1. 编译后的文件显示没问题，但编辑功能会使页面崩溃。可能和dev模式下报的`infinite update loop`有关。未排除是否是框架问题。
+1. element-ui的组件在render函数下存在`infinite update loop`错误。
 
 ---
 ## MODEL
@@ -88,7 +88,6 @@ posts:
   - means the `HotModuleReplacementPlugin` is not used.
   - `--hot` adds it. (because the CLI have access to your webpack configuration)
   - `hot: true` in config file doesn't add it. (because the API doesn't have access to your webpack configuration)
-  - devServer有时会无法正常加载vue文件。静候一段时间后问题或会消失（not a joke）。
 - should not use [chunkhash] or [hash] for development. This will cause many other issues, like a memory leak, because the dev server does not know when to clean up the old files.
 
 

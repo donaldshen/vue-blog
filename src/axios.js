@@ -12,15 +12,15 @@ const http = axios.create({
   baseURL: serverURL,
   withCredentials: true,
   headers: {
-    'Access-Control-Allow-Origin': serverURL
-  }
+    'Access-Control-Allow-Origin': serverURL,
+  },
 })
 
 http.interceptors.response.use((res) => {
   if (res.data.message) {
     Vue.prototype.$message({
       message: res.data.message,
-      type: 'success'
+      type: 'success',
     })
   }
   return res
