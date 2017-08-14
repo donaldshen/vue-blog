@@ -20,11 +20,11 @@ export default {
     ...mapGetters(['userName']),
     postsDisplay () {
       return this.posts.filter(post => post.access === 'public' || this.userName === post.author.name)
-    }
+    },
   },
   components: {
-    PostContent
-  }
+    PostContent,
+  },
 }
 </script>
 

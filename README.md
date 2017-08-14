@@ -26,8 +26,7 @@ npm run build
 ```
 
 ## Bug
-1. dev模式启动后vue文件中的css未被正确读取，过一段时间会好，情况不明。（build的文件没这个问题）
-2. 编译后的文件显示没问题，但编辑功能会使页面崩溃。可能和dev模式下报的`infinite update loop`有关。未排除是否是框架问题。
+1. 编译后的文件显示没问题，但编辑功能会使页面崩溃。可能和dev模式下报的`infinite update loop`有关。未排除是否是框架问题。
 
 ---
 ## MODEL

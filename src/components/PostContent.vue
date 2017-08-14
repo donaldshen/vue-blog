@@ -16,7 +16,7 @@
 <script>
 export default {
   props: {
-    post: Object
+    post: Object,
   },
   computed: {
     content () {
@@ -24,8 +24,8 @@ export default {
     },
     birth () {
       return new Date(this.post.birth).toLocaleDateString()
-    }
-  }
+    },
+  },
 }
 </script>
 

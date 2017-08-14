@@ -15,12 +15,12 @@ router.route('/')
       req.session.user = user
       res.status(201).json({
         message: '注册成功',
-        user
+        user,
       })
     } catch (e) {
       if (e.code === 11000) {
         res.status(409).json({
-          message: '用户名已被使用！'
+          message: '用户名已被使用！',
         })
       } else {
         next(e)
@@ -38,7 +38,7 @@ router.route('/')
         next(e)
       } else {
         res.status(200).json({
-          message: '注销成功'
+          message: '注销成功',
         })
       }
     })

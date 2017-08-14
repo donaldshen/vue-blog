@@ -34,5 +34,5 @@ export {
   get,
   set,
   unset,
-  clear
+  clear,
 }

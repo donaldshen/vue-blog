@@ -6,7 +6,7 @@ const { checkLogin } = require('./utils')
 router.route('/')
   .get((req, res) => {
     res.status(200).json({
-      user: req.session.user
+      user: req.session.user,
     })
   })
   .post(checkLogin(false), async (req, res, next) => {
@@ -30,16 +30,16 @@ router.route('/')
         req.session.user = user
         res.status(200).json({
           message: '登录成功',
-          user
+          user,
         })
       } else {
         res.status(403).json({
-          message: '密码错误'
+          message: '密码错误',
         })
       }
     } else {
       res.status(403).json({
-        message: '用户名不存在'
+        message: '用户名不存在',
       })
     }
   })
@@ -49,7 +49,7 @@ router.route('/')
         next(e)
       } else {
         res.status(200).json({
-          message: '登出成功'
+          message: '登出成功',
         })
       }
     })

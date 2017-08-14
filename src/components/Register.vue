@@ -37,15 +37,15 @@ export default {
         name: '',
         password: '',
         rePassword: '',
-        bio: ''
+        bio: '',
       },
       rules: {
         name: [
           {
             required: true,
             message: '请输入用户名',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         password: [
           {
@@ -59,8 +59,8 @@ export default {
                 callback()
               }
             },
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         rePassword: [
           {
@@ -73,10 +73,10 @@ export default {
                 callback()
               }
             },
-            trigger: 'blur'
-          }
-        ]
-      }
+            trigger: 'blur',
+          },
+        ],
+      },
     }
   },
   methods: {
@@ -92,8 +92,8 @@ export default {
               url: 'users',
               data: this.$qs.stringify(user),
               headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              }
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
             })
             // 不使用提交前的user，因为server会加工数据
             this.$store.commit('updateUser', res.data.user)
@@ -105,7 +105,7 @@ export default {
           console.log('Error', '表单有误')
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>

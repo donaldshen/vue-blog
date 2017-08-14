@@ -24,7 +24,7 @@ module.exports = (env = {}) => ({
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          extractCSS: !!env.production
+          extractCSS: true
         }
       },
       {

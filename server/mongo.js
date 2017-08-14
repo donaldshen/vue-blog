@@ -12,34 +12,34 @@ let postCollection
     userCollection = await db.createCollection('user', {
       validator: {
         name: {
-          $type: 'string'
+          $type: 'string',
         },
         password: {
-          $type: 'string'
+          $type: 'string',
         },
         bio: {
-          $type: 'string'
-        }
-      }
+          $type: 'string',
+        },
+      },
     })
     userCollection.createIndex({
-      name: 1
+      name: 1,
     }, {
-      unique: true
+      unique: true,
     })
     postCollection = await db.createCollection('post', {
       validator: {
         author: { $type: 'string' },
         title: { $type: 'string' },
         content: { $type: 'string' },
-        access: { $in: ['public', 'private'] }
-      }
+        access: { $in: ['public', 'private'] },
+      },
     })
     postCollection.createIndex({
       author: 1,
-      title: 1
+      title: 1,
     }, {
-      unique: true
+      unique: true,
     })
   } catch (e) {
     console.error(`error: ${e.message}`)
@@ -58,11 +58,11 @@ module.exports = {
     async delete ({ name }) {
       return Promise.all([
         postCollection.deleteMany({
-          author: name
+          author: name,
         }),
-        userCollection.deleteOne({ name })
+        userCollection.deleteOne({ name }),
       ])
-    }
+    },
   },
   PostModel: {
     async add (post) {
@@ -78,7 +78,7 @@ module.exports = {
         delete post._id
         return new Promise(async (resolve) => {
           const au = await userCollection.findOne({
-            name: post.author
+            name: post.author,
           })
           delete au.password
           delete au._id
@@ -95,10 +95,10 @@ module.exports = {
       const _id = new ObjectID(post.id)
       delete post.id
       return postCollection.findAndModify({
-        _id
+        _id,
       }, [], {
-        $set: post
+        $set: post,
       })
-    }
-  }
+    },
+  },
 }

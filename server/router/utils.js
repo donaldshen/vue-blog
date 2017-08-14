@@ -6,9 +6,9 @@ module.exports = {
         next()
       } else {
         res.status(403).json({
-          message: status ? '未登录' : '已登录'
+          message: status ? '未登录' : '已登录',
         })
       }
     }
-  }
+  },
 }

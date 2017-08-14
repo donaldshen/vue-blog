@@ -28,24 +28,24 @@ export default {
     return {
       form: {
         name: '',
-        password: ''
+        password: '',
       },
       rules: {
         name: [
           {
             required: true,
             message: '请输入用户名',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         password: [
           {
             required: true,
             message: '请输入密码',
-            trigger: 'blur'
-          }
-        ]
-      }
+            trigger: 'blur',
+          },
+        ],
+      },
     }
   },
   methods: {
@@ -58,8 +58,8 @@ export default {
               url: 'sessions',
               data: this.$qs.stringify(this.form),
               headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              }
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
             })
             this.$store.commit('updateUser', res.data.user)
             this.$router.replace('/')
@@ -70,7 +70,7 @@ export default {
           console.log('Error', '表单有误')
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
